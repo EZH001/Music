@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Music</string>
+    <string name="mix">Перемешать</string>
+    <string name="fav">Избранное</string>
+    <string name="playlists">Плейлисты</string>
+    <string name="total_tracks">Кол-во треков</string>
+    <string name="track_title">Пример Текста</string>
+    <string name="back_btn">Назад</string>
 </resources>
