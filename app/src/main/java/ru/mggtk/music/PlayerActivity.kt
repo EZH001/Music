@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.IBinder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+
 import ru.mggtk.music.databinding.ActivityPlayerBinding
 
  class PlayerActivity : AppCompatActivity(), ServiceConnection {
@@ -90,7 +91,7 @@ import ru.mggtk.music.databinding.ActivityPlayerBinding
              createPlayer()
          }
          else{
-             setTrackPosition(i = true)
+             setTrackPosition(i = false)
              setCover()
              createPlayer()
          }
@@ -112,6 +113,7 @@ import ru.mggtk.music.databinding.ActivityPlayerBinding
          val binder = service as MusicService.MyBinder
          musicService = binder.currentService()
          createPlayer()
+         musicService!!.showNotification()
      }
 
      override fun onServiceDisconnected(name: ComponentName?) {
