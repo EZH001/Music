@@ -3,9 +3,14 @@
     <string name="mix">Перемешать</string>
     <string name="fav">Избранное</string>
     <string name="playlists">Плейлисты</string>
-    <string name="total_tracks">Кол-во треков</string>
+    <string name="total_tracks">Кол-во треков:</string>
     <string name="track_title">Пример Текста</string>
     <string name="back_btn">Назад</string>
     <string name="time_start">0:00</string>
     <string name="time_stop">2:56</string>
+    <string name="ok">Ok</string>
+    <string name="permission_granted">Разрешение предоставлено</string>
+    <string name="permission_denied">Разрешение отклонено</string>
+    <string name="permission_required">Требуется разрешение</string>
+    <string name="album">Альбом песни</string>
 </resources>
