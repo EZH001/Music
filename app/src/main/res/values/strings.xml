@@ -13,4 +13,9 @@
     <string name="permission_denied">Разрешение отклонено</string>
     <string name="permission_required">Требуется разрешение</string>
     <string name="album">Альбом песни</string>
+    <string name="min_15">15 минут</string>
+    <string name="min_30">30 минут</string>
+    <string name="min_60">60 минут</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

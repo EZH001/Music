@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/md_theme_light_primaryContainer"
+    tools:context=".NowPlaying">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/trackCover3"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        app:shapeAppearanceOverlay="@style/curved"
+        android:src="@drawable/vinyl"
+        />
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/nextBtn2"
+        app:icon="@drawable/next"
+        android:layout_centerVertical="true"
+        app:iconSize="32dp"
+        android:layout_marginEnd="10dp"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/startBtn2"
+        app:icon="@drawable/start"
+        android:layout_centerVertical="true"
+        app:iconSize="32dp"
+        android:layout_toStartOf="@id/nextBtn2"
+        android:layout_marginHorizontal="5dp"/>
+    <TextView
+        android:id="@+id/trackTitle3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/track_title"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_toStartOf="@id/startBtn2"
+        android:layout_toEndOf="@id/trackCover3"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"/>
+</RelativeLayout>

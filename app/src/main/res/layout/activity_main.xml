@@ -73,4 +73,13 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nowPlaying"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:name="ru.mggtk.music.NowPlaying"
+        tools:layout="@layout/fragment_now_playing"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

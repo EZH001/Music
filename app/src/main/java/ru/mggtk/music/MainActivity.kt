@@ -16,12 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import ru.mggtk.music.databinding.ActivityMainBinding
 import java.io.File
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var musicAdapter: MusicAdapter
 companion object{
     lateinit var MusicListMA: ArrayList<Music>
+
     val sortingList = arrayOf(MediaStore.Audio.Media.DATE_ADDED + " DESC", MediaStore.Audio.Media.TITLE,
         MediaStore.Audio.Media.SIZE + " DESC")
     var sortOrder: Int = 0
@@ -35,39 +37,48 @@ companion object{
         setContentView(binding.root)
         if (requestPerm()){
         initLayout()}
-
+            //обработчики кнопок
+        //Кнопка перемешки
         binding.mixBtn.setOnClickListener{
             val intent: Intent = Intent(this@MainActivity, PlayerActivity::class.java)
             intent.putExtra("index", 0)
             intent.putExtra("class", "MainActivity")
             startActivity(intent)
         }
+        //Избранное
         binding.favBtn.setOnClickListener{
             startActivity(Intent(this@MainActivity, FavouriteActivity::class.java))
         }
+        //плейлисты
         binding.playlistsButton.setOnClickListener{
             val intent: Intent = Intent(this@MainActivity, PlaylistActivity::class.java)
             startActivity(intent)
         }
         }
+
     @RequiresApi(Build.VERSION_CODES.R)
+    //Переопределение функции для запроса разрешения на чтение файла
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == 13){
+        if(requestCode == 1){
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this, "Доступ разрешен",Toast.LENGTH_SHORT).show()
                 initLayout()
             }
             else
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 13)
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
         }
     }
     @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("SetTextI18n")
+    //функция-содержимое onCreate. Создана для того, чтобы уменьшить кол-во кода выше
     fun initLayout(){
         MusicListMA = getAllAudio()
+        //используется, когда размер элементов списка одинаковый (высота/ширина)
         binding.tracksListMain.setHasFixedSize(true)
+        //Устанавливает количество закадровых представлений, которые необходимо сохранить
         binding.tracksListMain.setItemViewCacheSize(13)
+        //Для размещения своих дочерних элементов в RecycleView
         binding.tracksListMain.layoutManager = LinearLayoutManager(this@MainActivity)
         musicAdapter = MusicAdapter(this@MainActivity, MusicListMA)
         binding.tracksListMain.adapter = musicAdapter
@@ -75,6 +86,7 @@ companion object{
     }
     @SuppressLint("Recycle", "Range")
     @RequiresApi(Build.VERSION_CODES.R)
+    //функция для чтения файлов музыки и получения данных вроде названия
     fun getAllAudio(): ArrayList<Music>{
         val tempList = ArrayList<Music>()
         val selection = MediaStore.Audio.Media.IS_MUSIC + " != 0"
@@ -105,14 +117,19 @@ companion object{
         }
         return tempList
     }
+    //функция для запроса разрешения
     fun requestPerm(): Boolean{
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU){
             if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 13)
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
                 return false
             }
         }
         return true
+    }
+    override fun onDestroy(){
+        super.onDestroy()
+        exitApp()
     }
 }
